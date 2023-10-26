@@ -378,6 +378,7 @@ InferenceRequest::OutputBufferProperties(
 Status
 InferenceRequest::Run(std::unique_ptr<InferenceRequest>& request)
 {
+  LOG_INFO << "Running inference request : " << request.get()->ModelName();
   RETURN_IF_ERROR(request->SetState(InferenceRequest::State::PENDING));
   return request->model_raw_->Enqueue(request);
 }

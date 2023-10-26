@@ -815,7 +815,7 @@ ModelLifeCycle::OnLoadFinal(
                   << status.AsString();
       }
     }
-    LOG_INFO << "successfully loaded '" << model_id << "'";
+    LOG_INFO << "successfully loaded (modified version)'" << model_id << "'";
   }
 
   if (OnComplete) {
