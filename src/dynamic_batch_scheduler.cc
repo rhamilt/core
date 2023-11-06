@@ -165,7 +165,10 @@ DynamicBatchScheduler::Enqueue(std::unique_ptr<InferenceRequest>& request)
 {
   auto metrics = triton::core::Metrics::GetRegistry().get()->Collect();
   for (auto metric : metrics) {
-    LOG_INFO << metric.name;
+    if (metric.name == "nv_gpu_power_usage") {
+      LOG_INFO << metric.name;
+      LOG_INFO << metric.metric[0].counter.value;
+    }
   }
   if (stop_) {
     return Status(
