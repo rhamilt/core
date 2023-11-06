@@ -163,7 +163,10 @@ DynamicBatchScheduler::~DynamicBatchScheduler()
 Status
 DynamicBatchScheduler::Enqueue(std::unique_ptr<InferenceRequest>& request)
 {
-  LOG_INFO << triton::core::Metrics::SerializedMetrics();
+  auto metrics = triton::core::Metrics::GetRegistry().get()->Collect();
+  for (auto metric : metrics) {
+    LOG_INFO << metric.name;
+  }
   if (stop_) {
     return Status(
         Status::Code::UNAVAILABLE,
